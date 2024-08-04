@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "password",
+    "address": "123 Maple Street, Springfield, IL, 62701",
+    "phoneNumber": "+1-555-123-4567",
+    "avatar": "https://example.com/avatars/alice.jpg",
+    "role": "admin"
+  },
+  {
+    "name": "User",
+    "email": "user@gmail.com",
+    "password": "password",
+    "address": "456 Oak Avenue, Springfield, IL, 62702",
+    "phoneNumber": "+1-555-765-4321",
+    "avatar": "https://example.com/avatars/bob.jpg",
+    "role": "user"
+  }
+]

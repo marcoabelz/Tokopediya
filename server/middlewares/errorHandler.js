@@ -27,9 +27,24 @@ module.exports = function errorrHandler(error, req, res, next) {
       message = "Password is required!";
       break;
 
+    case "EmptyLogin":
+      status = 400;
+      message = "Email / Password is required!";
+      break;
+
     case "NotFound":
       status = 404;
       message = "Not Found!";
+      break;
+
+    case "InvalidEmail":
+      status = 400;
+      message = "Invalid email format!";
+      break;
+
+    case "InvalidLogin":
+      status = 400;
+      message = "Incorrect email / password!";
       break;
   }
   res.status(status).json({ message });

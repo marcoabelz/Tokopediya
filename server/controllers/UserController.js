@@ -1,5 +1,8 @@
 const { User } = require("../models");
-const { hashPassword } = require("../helpers/bcrypt");
+const { hashPassword, comparePassword } = require("../helpers/bcrypt");
+const validator = require("validator");
+const { compare } = require("bcryptjs");
+const { signToken } = require("../helpers/jwt");
 
 class UserController {
   static async register(req, res, next) {
@@ -9,6 +12,25 @@ class UserController {
       password = hashPassword(password);
       await User.create({ name, email, password, address, phoneNumber, avatar });
       res.status(201).json({ message: `User: ${name} created!` });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) throw { name: "EmptyLogin" };
+      if (!validator.isEmail(email)) {
+        throw { name: "InvalidEmail" };
+      }
+      let user = await User.findOne({
+        where: {
+          email,
+        },
+      });
+      if (!user) throw { name: "NotFound" };
+      if (!comparePassword(password, user.password)) throw { name: "InvalidLogin" };
+      res.status(200).json({ accessToken: signToken(user.id) });
     } catch (error) {
       next(error);
     }

@@ -1,9 +1,12 @@
 const express = require("express");
+const { getAllUser, getUserById, register, updateUserById, deleteUserById } = require("../controllers/UserController");
 const router = express.Router();
 
 // define the home page route
-router.get("/", (req, res) => {
-  res.send("User home page");
-});
+router.get("/", getAllUser);
+router.post("/register", register);
+router.get("/:id", getUserById);
+router.put("/:id", updateUserById);
+router.delete("/:id", deleteUserById);
 
 module.exports = router;

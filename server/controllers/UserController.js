@@ -30,7 +30,7 @@ class UserController {
       });
       if (!user) throw { name: "NotFound" };
       if (!comparePassword(password, user.password)) throw { name: "InvalidLogin" };
-      res.status(200).json({ accessToken: signToken(user.id) });
+      res.status(200).json({ accessToken: signToken({ id: user.id }), role: user.role });
     } catch (error) {
       next(error);
     }

@@ -46,6 +46,18 @@ module.exports = function errorrHandler(error, req, res, next) {
       status = 400;
       message = "Incorrect email / password!";
       break;
+
+    case "NotLogin":
+      status = 401;
+      message = "Please Login!";
+      break;
+
+    case "InvalidToken":
+    case "JsonWebTokenError":
+    case "SyntaxError":
+      status = 401;
+      message = "Invalid Token!";
+      break;
   }
   res.status(status).json({ message });
 };
